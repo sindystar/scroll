@@ -1,16 +1,31 @@
-const h1 = document.querySelector('h1');
+const sections = document.querySelectorAll("section");
+const lis = document.querySelectorAll("ul li");
+let posArr = [];//빈배열을 만듦
+//offsetTop - 해당 요소의 세로 위치값, 요소의 윗면 경계가 최상위 요소의 윗면 경계(브라우저 화면의 맨위)에서 얼만큼 떨어져 있는지를 그 거리를 반환 해줌 
+for (let el of sections) {
+  posArr.push(el.offsetTop);
+}
 
-window.addEventListener("scroll", () => {
-  let scroll = window.scrolly || window.pageYOffset;
-  //||은 둘중 하나라도  그 값이 있다면 변수에 넣겠다 
 
-  /*
-  scrolly 문서가 수직으로 얼마나 스크롤 되었는지를 픽 셀 단위로 반환해 준다 
-
-  window.scrolly === window.pageyOffset
-  익스플로러에서는 scrollly 가 적용이 안됨 
-
-  */
-
+window.addEventListener("scroll", ()=> {
+  let scroll = window.scrollY || window.pageYOffset;
   h1.innerText = scroll;
+})
+
+//ul li 를 클릭 하면 해당 순번의 section 으로 이동 
+
+lis.forEach((el, index) => {
+  el.addEventListener("click", (e) => {
+    new Anim(window, {
+      prop: "scroll",
+      value: posArr[index],
+      duration: 500,
+    });
+
+    //모든 버튼을 반복을 돌면서 on을 제거하여 비활성화 
+    for (let el of lis) el.classList.remove("on");
+    //클릭한 버튼만 on을 추가 하여 활성화 
+    el.classList.add("on");
+    //e.currentTarget.classList.add("on")
+  })
 })
