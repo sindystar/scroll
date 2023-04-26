@@ -28,11 +28,7 @@ window.addEventListener("scroll", ()=> {
     }
   })
 
-  
- 
-  })
-  
-
+})
 
 //ul li 를 클릭 하면 해당 순번의 section 으로 이동 
 //이쪽은 클릭으로 스크롤을 이동 시키는 쪽 
